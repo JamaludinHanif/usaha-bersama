@@ -116,7 +116,7 @@ const Cart = () => {
       {Data.length == 0 ? (
         <>
           <div className="h-screen flex flex-1 flex-col justify-center">
-            <Empty description={<p className="capitalize">Keranjang kmu kosong, silahkna pilih barang terlebih dahulu</p>} />
+            <Empty description={<p className="capitalize px-7">Keranjang kmu kosong, silahkna pilih barang terlebih dahulu</p>} />
           </div>
         </>
       ) : (

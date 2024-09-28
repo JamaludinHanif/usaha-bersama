@@ -85,6 +85,7 @@ const Login = () => {
                   src="./src/img/dudul.jpg"
                   alt="Udin Company"
                 />
+                <p className="text-red-600 text-xs">*Untuk performa yng nyaman, silahkan matikan fitur terjemahan otomatis</p>
                 <h2 class="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
                   Log in ke akun mu
                 </h2>
