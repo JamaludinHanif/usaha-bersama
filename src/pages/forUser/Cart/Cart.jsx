@@ -90,10 +90,9 @@ const Cart = () => {
   const calculateTotal = () => {
     return Selected?.products.reduce((acc, item) => acc + item.total_amount, 0);
   };
-  
 
-  console.log('ini item terpilih', Selected)
-  console.log('ini kalkulate', calculateTotal())
+  console.log("ini item terpilih", Selected);
+  console.log("ini kalkulate", calculateTotal());
 
   useEffect(() => {
     getMycart();
@@ -114,52 +113,65 @@ const Cart = () => {
       ) : (
         <></>
       )}
-      <div className="min-h-screen bg-gray-100 p-3 lg:p-4 pt-12 lg:px-5">
-        <p className="text-lg font-semibold mb-10" onClick={() => getMycart()}>
-          Kode Keranjang Kamu :
-        </p>
-        {Data.map((cart, index) => (
-          <>
-            <div className="bg-white py-3 px-6 rounded-lg border shadow-sm mt-5">
-              <div className="flex flex-row justify-between mt-3">
-                <div className="">
-                  <p className="lg:text-xl text-lg font-bold">
-                    {cart?.items?.code}
-                  </p>
-                  <div></div>
-                </div>
-                <div className="">
-                  <div
-                    className="flex flex-row items-center mb-1 font-semibold text-blue-600 cursor-pointer"
-                    onClick={() => {
-                      setOpen2(true);
-                      setSelected(cart?.items)
-                    }}
-                  >
-                    <p className="text-sm">Detail</p>
-                    <i className="ml-1">
-                      <HiEye />
-                    </i>
-                  </div>
-                  <CopyToClipboard text={cart?.items?.code}>
-                    <div
-                      className="flex flex-row items-center font-semibold text-blue-600 cursor-pointer"
-                      onClick={() => {
-                        handleCopy(), message.info("Text berhasil di Copy");
-                      }}
-                    >
-                      <p className="text-sm">Salin</p>
-                      <i className="ml-1">
-                        <HiOutlineSquare2Stack />
-                      </i>
+      {Data.length == 0 ? (
+        <>
+          <div className="h-screen flex flex-1 flex-col justify-center">
+            <Empty description={<p className="capitalize">Keranjang kmu kosong, silahkna pilih barang terlebih dahulu</p>} />
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="min-h-screen bg-gray-100 p-3 lg:p-4 pt-12 lg:px-5">
+            <p
+              className="text-lg font-semibold mb-10"
+              onClick={() => getMycart()}
+            >
+              Kode Keranjang Kamu :
+            </p>
+            {Data.map((cart, index) => (
+              <>
+                <div className="bg-white py-3 px-6 rounded-lg border shadow-sm mt-5">
+                  <div className="flex flex-row justify-between mt-3">
+                    <div className="">
+                      <p className="lg:text-xl text-lg font-bold">
+                        {cart?.items?.code}
+                      </p>
+                      <div></div>
                     </div>
-                  </CopyToClipboard>
+                    <div className="">
+                      <div
+                        className="flex flex-row items-center mb-1 font-semibold text-blue-600 cursor-pointer"
+                        onClick={() => {
+                          setOpen2(true);
+                          setSelected(cart?.items);
+                        }}
+                      >
+                        <p className="text-sm">Detail</p>
+                        <i className="ml-1">
+                          <HiEye />
+                        </i>
+                      </div>
+                      <CopyToClipboard text={cart?.items?.code}>
+                        <div
+                          className="flex flex-row items-center font-semibold text-blue-600 cursor-pointer"
+                          onClick={() => {
+                            handleCopy(), message.info("Text berhasil di Copy");
+                          }}
+                        >
+                          <p className="text-sm">Salin</p>
+                          <i className="ml-1">
+                            <HiOutlineSquare2Stack />
+                          </i>
+                        </div>
+                      </CopyToClipboard>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </>
-        ))}
-      </div>
+              </>
+            ))}
+          </div>
+        </>
+      )}
 
       <Modal
         open={Open2}
@@ -203,9 +215,7 @@ const Cart = () => {
                           <div className="mr-1 text-xs">{index + 1}.</div>
                         </td>
                         <td className="border-r py-2">
-                          <p className="">
-                            {item?.name.slice(0, 20)}.....
-                          </p>
+                          <p className="">{item?.name.slice(0, 20)}.....</p>
                         </td>
                         <td className="border-r py-2">
                           {" "}
@@ -241,31 +251,33 @@ const Cart = () => {
 
               <div className="text-right text-sm font-semibold mt-10">
                 <p>Total</p>
-                <p className="">Rp. {calculateTotal().toLocaleString("id-ID")}</p>
+                <p className="">
+                  Rp. {calculateTotal().toLocaleString("id-ID")}
+                </p>
               </div>
             </>
           )}
         </div>
         <div className="items-center mt-5">
           <div className="flex flex-row justify-around">
-          <CopyToClipboard text={Selected?.code}>
-
-            <button
-            //   disabled={Items[0]?.value == null}
-              onClick={() => {handleCopy(), message.info("Text berhasil di Copy");}}
-              className="bg-blue-600 w-3/4 disabled:bg-gray-400 text-white font-semibold rounded-lg py-2 px-6 text-center cursor-pointer hover:opacity-75"
-            >
-              Salin Kode
-              {/* {Loading ? (
+            <CopyToClipboard text={Selected?.code}>
+              <button
+                //   disabled={Items[0]?.value == null}
+                onClick={() => {
+                  handleCopy(), message.info("Text berhasil di Copy");
+                }}
+                className="bg-blue-600 w-3/4 disabled:bg-gray-400 text-white font-semibold rounded-lg py-2 px-6 text-center cursor-pointer hover:opacity-75"
+              >
+                Salin Kode
+                {/* {Loading ? (
                 <>
                   <Spin indicator={antIcon} className="ml-5 mb-1" />
                 </>
               ) : null} */}
-            </button>
+              </button>
             </CopyToClipboard>
           </div>
         </div>
-
       </Modal>
     </>
   );

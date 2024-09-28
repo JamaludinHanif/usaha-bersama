@@ -58,7 +58,7 @@ function ResetPassword() {
         }
       )
       .then((response) => {
-        navigate('/')
+        window.location.href = 'https://usaha-bersama.vercel.app';
         message.success(response.data.message)
         message.success("Silahkan Login Ulang")
     })
@@ -72,34 +72,6 @@ function ResetPassword() {
 
   return (
     <>
-      {/* <div>
-        <h2>Reset Password</h2>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Masukkan email"
-            required
-          />
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Masukkan password baru"
-            required
-          />
-          <input
-            type="password"
-            value={passwordConfirmation}
-            onChange={(e) => setPasswordConfirmation(e.target.value)}
-            placeholder="Konfirmasi password baru"
-            required
-          />
-          <button type="submit">Reset Password</button>
-        </form>
-        {message && <p>{message}</p>}
-      </div> */}
 
       <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
