@@ -376,13 +376,17 @@ const IndexUser = () => {
               >
                 <img
                   className="h-28 w-44 object-cover m-auto rounded-lg"
-                  src={produk?.image}
+                  src={
+                    produk?.image == null
+                      ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI3-0UOb16mRek6YkvKr4wuBpEmwYfWhav0w&s"
+                      : produk?.image
+                  }
                 />
                 <div className="px-2 py-1 border-t">
                   <div className="flex justify-between">
                     {produk?.category === "makanan" ? (
                       <>
-                        <div className="bg-teal-300 w-8/12 rounded-tr-xl my-1">
+                        <div className="bg-cyan-400 w-8/12 rounded-tr-xl my-1">
                           <p className="text-white text-xs text-center">
                             Makanan
                           </p>
@@ -395,7 +399,7 @@ const IndexUser = () => {
                               ? "bg-blue-300"
                               : produk?.unit === "pak"
                               ? "bg-green-300"
-                              : "bg-red-300"
+                              : "bg-yellow-300"
                           } w-3/12 rounded-tl-xl my-1`}
                         >
                           <p className="text-white text-xs text-center">
@@ -405,7 +409,7 @@ const IndexUser = () => {
                       </>
                     ) : produk?.category === "minuman" ? (
                       <>
-                        <div className="bg-yellow-300 w-8/12 rounded-tr-xl my-1">
+                        <div className="bg-yellow-400 w-8/12 rounded-tr-xl my-1">
                           <p className="text-white text-xs text-center">
                             Minuman
                           </p>
@@ -418,7 +422,7 @@ const IndexUser = () => {
                               ? "bg-blue-300"
                               : produk?.unit === "pak"
                               ? "bg-green-300"
-                              : "bg-red-300"
+                              : "bg-yellow-300"
                           } w-3/12 rounded-tl-xl my-1`}
                         >
                           <p className="text-white text-xs text-center">
@@ -426,7 +430,7 @@ const IndexUser = () => {
                           </p>
                         </div>
                       </>
-                    ) : (
+                    ) : produk?.category === "pembersih" ? (
                       <>
                         <div className="bg-pink-400 w-8/12 rounded-tr-xl my-1">
                           <p className="text-white text-xs text-center">
@@ -441,7 +445,30 @@ const IndexUser = () => {
                               ? "bg-blue-300"
                               : produk?.unit === "pak"
                               ? "bg-green-300"
-                              : "bg-red-300"
+                              : "bg-yellow-300"
+                          } w-3/12 rounded-tl-xl my-1`}
+                        >
+                          <p className="text-white text-xs text-center">
+                            {produk?.unit}
+                          </p>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="bg-gray-500 w-8/12 rounded-tr-xl my-1">
+                          <p className="text-white text-xs text-center">
+                            Lainnya
+                          </p>
+                        </div>
+                        <div
+                          className={`${
+                            produk?.unit === "pcs"
+                              ? "bg-red-300"
+                              : produk?.unit === "dos"
+                              ? "bg-blue-300"
+                              : produk?.unit === "pak"
+                              ? "bg-green-300"
+                              : "bg-yellow-300"
                           } w-3/12 rounded-tl-xl my-1`}
                         >
                           <p className="text-white text-xs text-center">
@@ -494,7 +521,11 @@ const IndexUser = () => {
         <div className="flex my-7">
           <div className="w-1/2">
             <img
-              src={Selected?.image}
+              src={
+                Selected?.image == null
+                  ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI3-0UOb16mRek6YkvKr4wuBpEmwYfWhav0w&s"
+                  : Selected?.image
+              }
               className="h-28 w-28 object-cover p-1 border rounded-lg"
               alt=""
             />
@@ -511,7 +542,7 @@ const IndexUser = () => {
             <div className="flex justify-between">
               {Selected?.category === "makanan" ? (
                 <>
-                  <div className="bg-teal-300 w-8/12 rounded-tr-xl my-1">
+                  <div className="bg-cyan-400 w-8/12 rounded-tr-xl my-1">
                     <p className="text-white text-xs text-center">Makanan</p>
                   </div>
                   <div
@@ -522,7 +553,7 @@ const IndexUser = () => {
                         ? "bg-blue-300"
                         : Selected?.unit === "pak"
                         ? "bg-green-300"
-                        : "bg-red-300"
+                        : "bg-yellow-300"
                     } w-3/12 rounded-tl-xl my-1`}
                   >
                     <p className="text-white text-xs text-center">
@@ -532,7 +563,7 @@ const IndexUser = () => {
                 </>
               ) : Selected?.category === "minuman" ? (
                 <>
-                  <div className="bg-yellow-300 w-8/12 rounded-tr-xl my-1">
+                  <div className="bg-yellow-400 w-8/12 rounded-tr-xl my-1">
                     <p className="text-white text-xs text-center">Minuman</p>
                   </div>
                   <div
@@ -543,7 +574,7 @@ const IndexUser = () => {
                         ? "bg-blue-300"
                         : Selected?.unit === "pak"
                         ? "bg-green-300"
-                        : "bg-red-300"
+                        : "bg-yellow-300"
                     } w-3/12 rounded-tl-xl my-1`}
                   >
                     <p className="text-white text-xs text-center">
@@ -551,7 +582,7 @@ const IndexUser = () => {
                     </p>
                   </div>
                 </>
-              ) : (
+              ) : Selected?.category === "pembersih" ? (
                 <>
                   <div className="bg-pink-400 w-8/12 rounded-tr-xl my-1">
                     <p className="text-white text-xs text-center">Pembersih</p>
@@ -564,7 +595,28 @@ const IndexUser = () => {
                         ? "bg-blue-300"
                         : Selected?.unit === "pak"
                         ? "bg-green-300"
-                        : "bg-red-300"
+                        : "bg-yellow-300"
+                    } w-3/12 rounded-tl-xl my-1`}
+                  >
+                    <p className="text-white text-xs text-center">
+                      {Selected?.unit}
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="bg-gray-500 w-8/12 rounded-tr-xl my-1">
+                    <p className="text-white text-xs text-center">Lainnya</p>
+                  </div>
+                  <div
+                    className={`${
+                      Selected?.unit === "pcs"
+                        ? "bg-red-300"
+                        : Selected?.unit === "dos"
+                        ? "bg-blue-300"
+                        : Selected?.unit === "pak"
+                        ? "bg-green-300"
+                        : "bg-yellow-300"
                     } w-3/12 rounded-tl-xl my-1`}
                   >
                     <p className="text-white text-xs text-center">
@@ -728,7 +780,8 @@ const IndexUser = () => {
         </div>
         <p className="mt-10 text-xs px-4">
           note : *kmu juga bisa menggunakan kode ini berkali-kali, lihat kode
-          keranjang yang tersimpan, dihalaman <span className="text-blue-600">Keranjang</span>
+          keranjang yang tersimpan, dihalaman{" "}
+          <span className="text-blue-600">Keranjang</span>
         </p>
         <div className="items-center mt-8">
           <div className="flex flex-row justify-around">

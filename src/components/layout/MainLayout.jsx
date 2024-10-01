@@ -243,6 +243,7 @@ export default function MainLayout({ children }) {
                               onClick={() => {
                                 handleNavigation(item.name);
                                 fakeLoading();
+                                setSidebarOpen(false);
                               }}
                               className={classNames(
                                 item.current
@@ -279,6 +280,7 @@ export default function MainLayout({ children }) {
                               onClick={() => {
                                 handleNavigation(item.name);
                                 fakeLoading();
+                                setSidebarOpen(false);
                               }}
                               className={classNames(
                                 item.current
