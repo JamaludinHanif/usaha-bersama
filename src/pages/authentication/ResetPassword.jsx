@@ -58,7 +58,8 @@ function ResetPassword() {
         }
       )
       .then((response) => {
-        window.location.href = 'https://usaha-bersama.vercel.app';
+        // window.location.href = 'https://usaha-bersama.vercel.app';
+        navigate('/')
         message.success(response.data.message)
         message.success("Silahkan Login Ulang")
     })
