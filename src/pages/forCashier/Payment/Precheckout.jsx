@@ -32,20 +32,34 @@ const Precheckout = () => {
   const [IsLoading, setIsLoading] = useState(false);
   const [Loading, setLoading] = useState(false);
   const [modal2Open, setModal2Open] = useState(false);
-  const [Email, setEmail] = useState(userData?.email);
+  const [Email, setEmail] = useState("");
+  const [NoHp, setNoHp] = useState("");
   const [Name, setName] = useState("Pembeli");
+  const [Selected, setSelected] = useState();
+
+  const inputSelect = (e) => {
+    const value = e.target.value;
+    console.log("ini select", value);
+    if (value === "email") {
+      setSelected("email");
+    } else if (value === "whatsapp") {
+      setSelected("whatsapp");
+    }
+  };
 
   let body = {
     data: items,
     userId: userData?.id,
     name: Name,
     email: Email,
+    noHp: NoHp,
+    methodSending: Selected,
   };
 
   const checkout = async () => {
     setLoading(true);
     await axios
-      .post(`${API.Ngrok_URL}/product/checkout`, body, {
+      .post(`${API.Ngrok_URL}/transactions/checkout`, body, {
         headers: {
           "bypass-tunnel-reminder": "true",
         },
@@ -113,16 +127,60 @@ const Precheckout = () => {
           </div>
         </div>
 
-        <div className="mt-10">
+        <div className="sm:col-span-3 mt-7">
+          <div className="mt-2">
+            {/* <p className="text-sm mb-2 px-3">
+              Masukan No Hp (Whatsapp) untuk penerimaan Invoice/Nota :
+            </p> */}
+            <select
+              onChange={inputSelect}
+              className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+            >
+              <option value="" disabled selected>
+                Pilih metode pengiriman invoice
+              </option>
+              <option value="email">Via Email</option>
+              <option value="whatsapp">Via Whatsapp</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="">
+          {Selected == "email" ? (
+            <>
+              <input
+                placeholder={`Masukan Email Pembeli, *contoh : ${userData?.email} `}
+                type="text"
+                autoComplete="off"
+                value={Email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full mt-5 text-sm rounded-lg outline-none shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 placeholder:text-xs disabled:bg-gray-200 focus:ring-2 focus:ring-inset focus:ring-blue-600 px-2 py-2.5"
+              />
+            </>
+          ) : Selected == "whatsapp" ? (
+            <>
+              <input
+                placeholder={`Masukan No. Hp (Whatsapp), *contoh : 6285161310017 `}
+                type="number"
+                autoComplete="off"
+                value={NoHp}
+                onChange={(e) => setNoHp(e.target.value)}
+                className="w-full mt-5 text-sm rounded-lg outline-none shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 placeholder:text-xs disabled:bg-gray-200 focus:ring-2 focus:ring-inset focus:ring-blue-600 px-2 py-2.5"
+              />
+            </>
+          ) : null}
+        </div>
+
+        <div className="mt-5">
           <p className="text-sm mb-2 px-3">
-            Masukan Email untuk penerimaan Invoice/Nota (*opsional) :
+            Masukan Nama pembeli (*opsional) :
           </p>
           <input
-            placeholder={`Masukan Email Pembeli, *contoh : ${userData?.email} `}
+            placeholder={`Masukan Nama Pembeli, *contoh : ${userData?.name} `}
             type="text"
             autoComplete="off"
-            value={Email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={Name}
+            onChange={(e) => setName(e.target.value)}
             className="w-full text-sm rounded-lg outline-none shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 placeholder:text-xs disabled:bg-gray-200 focus:ring-2 focus:ring-inset focus:ring-blue-600 px-2 py-2.5"
           />
         </div>
